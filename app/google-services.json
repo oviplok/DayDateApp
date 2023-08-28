@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207446788258",
+    "project_id": "date-dict-app",
+    "storage_bucket": "date-dict-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207446788258:android:149b888fd175cea0a02ffb",
+        "android_client_info": {
+          "package_name": "com.example.datedictator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207446788258-3smbbtlo1omqie0nvbe4bbs9i66pbkev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD08bSlyEzWW4AsSCKYmbl1hH_6eVUvaLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207446788258-3smbbtlo1omqie0nvbe4bbs9i66pbkev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
