@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:fitsSystemWindows="true"
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fitsSystemWindows="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +14,16 @@
         android:theme="@style/Theme.DateDictator"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activities.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.RegistrationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.LoginRegistrationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
