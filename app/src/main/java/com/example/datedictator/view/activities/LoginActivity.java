@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
-        mEmail = findViewById(R.id.username_login);
+        mEmail = findViewById(R.id.email_login);
         mPassword = findViewById(R.id.password_login);
         mLoginButton = findViewById(R.id.login_button);
         mProgBar = findViewById(R.id.loading_login);
@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                //mProgBar.setVisibility(View.VISIBLE);
+                mProgBar.setVisibility(View.VISIBLE);
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                     return;
                 }
-                //mProgBar.setVisibility(View.GONE);
+                mProgBar.setVisibility(View.GONE);
             }
         };
 

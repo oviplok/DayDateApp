@@ -31,18 +31,12 @@ public class LoginRegistrationActivity extends AppCompatActivity {
         mRegistration = findViewById(R.id.to_reg_button);
         mProgBar = findViewById(R.id.loading_activity_reglog);
 
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
-//        String Email = sharedPreferences.getString(EMAIL,"");
-//        String Password = sharedPreferences.getString(PASSWORD,"");
-//
-//        if(!Email.equals("") && !Password.equals("")){
-//            //mapAct(Email,,income_place);
-//        }
-        //mProgBar.setVisibility(View.VISIBLE);
+
         mAuth = FirebaseAuth.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                mProgBar.setVisibility(View.VISIBLE);
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(LoginRegistrationActivity.this, MainActivity.class);
@@ -54,7 +48,7 @@ public class LoginRegistrationActivity extends AppCompatActivity {
                     Toast.makeText(LoginRegistrationActivity.this,
                             "Enter to your profile", Toast.LENGTH_SHORT).show();
                 }
-                //mProgBar.setVisibility(View.GONE);
+                mProgBar.setVisibility(View.GONE);
             }
         };
         mLogin.setOnClickListener(new View.OnClickListener() {
@@ -76,5 +70,16 @@ public class LoginRegistrationActivity extends AppCompatActivity {
                 return;
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(firebaseAuthStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(firebaseAuthStateListener);
     }
 }

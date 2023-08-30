@@ -1,7 +1,6 @@
 package com.example.datedictator.view.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,16 +18,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.datedictator.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
 //    private static final String SHARED_PREF = "sharedPrefs";
 //    private static final String EMAIL = "email",PASSWORD = "password";
-    private EditText mEmail, mPassword;
+    private EditText mEmail, mPassword,mName;
+    private RadioGroup mGender;
     private Button mRegButton;
     private ProgressBar mProgBar;
 
@@ -38,8 +40,12 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.fragment_registration);
-        mEmail = findViewById(R.id.username_registration);
+        mGender = findViewById(R.id.radioGroup);
+        mName= findViewById(R.id.name_registration);
+        mEmail = findViewById(R.id.email_registration);
         mPassword = findViewById(R.id.password_registration);
         mRegButton = findViewById(R.id.registration_button);
         mProgBar = findViewById(R.id.loading_registration);
@@ -49,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                //mProgBar.setVisibility(View.VISIBLE);
+                mProgBar.setVisibility(View.VISIBLE);
                 final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
@@ -57,18 +63,27 @@ public class RegistrationActivity extends AppCompatActivity {
                     finish();
                     return;
                 }
-                //mProgBar.setVisibility(View.GONE);
+                mProgBar.setVisibility(View.GONE);
             }
         };
-
-
-//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
-//        String Email = sharedPreferences.getString(EMAIL,"");
-//        String Password = sharedPreferences.getString(PASSWORD,"");
 
         mRegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int selectedGender = mGender.getCheckedRadioButtonId();
+                final RadioButton radioButton =findViewById(selectedGender);
+                if (!radioButton.isChecked()){
+                    Toast.makeText(RegistrationActivity.this,
+                            "Choose your gender", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mName.getText().toString())) {
+                    Toast.makeText(RegistrationActivity.this,
+                            "Write your name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (TextUtils.isEmpty(mEmail.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this,
                             "Write your email", Toast.LENGTH_SHORT).show();
@@ -87,13 +102,14 @@ public class RegistrationActivity extends AppCompatActivity {
                     return;
                 }
 
-                StartReg(mEmail.getText().toString(),mPassword.getText().toString());
+                StartReg(mEmail.getText().toString(),
+                        mPassword.getText().toString(),mName.getText().toString(),radioButton.getText().toString());
             }
         });
 
     }
 
-    private void StartReg(String email, String password) {
+    private void StartReg(String email, String password, String name, String gender) {
         mProgBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -101,6 +117,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 if(!task.isSuccessful()){
 
                     Toast.makeText(RegistrationActivity.this, email+" "+password, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String userId = mAuth.getCurrentUser().getUid();
+                    DatabaseReference currentUserDb= FirebaseDatabase.getInstance()
+                            .getReference().child("Users").child(gender).child(userId).child("name");
+                    currentUserDb.setValue(name);
                 }
                 mProgBar.setVisibility(View.GONE);
 

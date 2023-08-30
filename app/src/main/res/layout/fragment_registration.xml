@@ -15,11 +15,10 @@
     <!--    tools:context=".ui.login.LoginFragment"-->
 
     <EditText
-        android:id="@+id/username_registration"
+        android:id="@+id/email_registration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_email"
         android:background="@drawable/rounded_edittext"
@@ -29,12 +28,47 @@
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
+        android:layout_marginTop="15dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_registration">
+
+        <RadioButton
+            android:id="@+id/male_radio"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
+            android:fontFamily="@font/comfortaa"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/female_radio"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
+            android:fontFamily="@font/comfortaa"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            tools:layout_editor_absoluteY="36dp" />
+
+    </RadioGroup>
 
     <EditText
         android:id="@+id/password_registration"
@@ -58,7 +92,31 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_registration" />
+        app:layout_constraintTop_toBottomOf="@+id/email_registration" />
+
+    <EditText
+        android:id="@+id/name_registration"
+        android:layout_width="0dp"
+        android:layout_marginTop="96dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="Your name"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/ic_action_profile"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/comfortaa"
+        android:hint="Name"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -97,4 +155,8 @@
         app:layout_constraintStart_toStartOf="@+id/password_registration"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
