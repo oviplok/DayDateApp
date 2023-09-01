@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private CardAdapter cardAdapter;
 
    // private ArrayAdapter<String> arrayAdapter;
+    private DatabaseReference usersDb;
     private int i;
     private FirebaseAuth mAuth;
     private String currentUserId;
@@ -46,9 +47,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
+        usersDb = FirebaseDatabase.getInstance().getReference().child("Users");
         mAuth =FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid().toString();
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         checkUserSex();
@@ -69,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
+                Card obj = (Card) dataObject;
+                String userId = obj.getUserId();
+                usersDb.child(userPrefer).child(userId).child("Connections")
+                        .child("Left").child(currentUserId).setValue(true);
                 //Do something on the left!
                 //You also have access to the original object.
                 //If you want to use it just cast it (String) dataObject
@@ -77,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onRightCardExit(Object dataObject) {
+                Card obj = (Card) dataObject;
+                String userId = obj.getUserId();
+                usersDb.child(userPrefer).child(userId).child("Connections")
+                        .child("Right").child(currentUserId).setValue(true);
                 Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
             }
 
@@ -190,10 +202,11 @@ public class MainActivity extends AppCompatActivity {
         partnersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(snapshot.exists()){
+                if(snapshot.exists()
+                        && !snapshot.child("Connections").child("Left").hasChild(currentUserId)
+                        && !snapshot.child("Connections").child("Right").hasChild(currentUserId)) {
                     Card item = new Card(snapshot.getKey().toString(),
                             snapshot.child("name").getValue().toString());
-
                     rowItems.add(item);
                     cardAdapter.notifyDataSetChanged();
                 }

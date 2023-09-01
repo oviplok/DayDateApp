@@ -121,8 +121,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 else {
                     String userId = mAuth.getCurrentUser().getUid();
                     DatabaseReference currentUserDb= FirebaseDatabase.getInstance()
-                            .getReference().child("Users").child(gender).child(userId).child("name");
-                    currentUserDb.setValue(name);
+                            .getReference().child("Users").child(gender).child(userId);
+                    currentUserDb.child("name").setValue(name);
+                    currentUserDb.child("Connections").child("Right").child("Uid").setValue(true);
+                    currentUserDb.child("Connections").child("Left").child("Uid").setValue(true);
+                   // currentUserDb.setValue(name);
                 }
                 mProgBar.setVisibility(View.GONE);
 
