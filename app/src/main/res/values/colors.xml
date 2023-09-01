@@ -6,5 +6,6 @@
     <color name="orange">#FCB045</color>
     <color name="purple">#833AB4</color>
     <color name="red">#FD1D1D</color>
-
+    <color name="empty">#00FFFFFF</color>
+    <color name="backgtound_white">#E6FFFFFF</color>
 </resources>

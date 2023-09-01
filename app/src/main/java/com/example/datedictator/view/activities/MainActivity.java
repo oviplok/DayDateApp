@@ -9,9 +9,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.datedictator.R;
+import com.example.datedictator.repository.model.Card;
+import com.example.datedictator.view.adapters.CardAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -22,13 +25,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<String> al;
-    private ArrayAdapter<String> arrayAdapter;
+    private Card card[];
+    private CardAdapter cardAdapter;
+
+   // private ArrayAdapter<String> arrayAdapter;
     private int i;
     private FirebaseAuth mAuth;
+    private String currentUserId;
+    private String name;
+
+    private ListView listView;
+    List<Card> rowItems;
 
 
 
@@ -41,23 +52,19 @@ public class MainActivity extends AppCompatActivity {
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         checkUserSex();
-        al = new ArrayList<String>();
-//        al.add("php");
-//        al.add("c");
-//        al.add("python");
-//        al.add("java");
+         rowItems = new ArrayList<Card>();
 
         //choose your favorite adapter
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.item, R.id.helloText, al );
+        cardAdapter = new CardAdapter(this,R.layout.item, rowItems);
 
-        flingContainer.setAdapter(arrayAdapter);
+        flingContainer.setAdapter(cardAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
-                al.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                rowItems.remove(0);
+                cardAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -178,14 +185,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void getPartners(){
-        DatabaseReference partnersDb = FirebaseDatabase.getInstance().getReference().child("Users")
-                .child(userPrefer);
+        DatabaseReference partnersDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userPrefer);
+
         partnersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if(snapshot.exists()){
-                    al.add(snapshot.child("name").getValue().toString());
-                    arrayAdapter.notifyDataSetChanged();
+                    Card item = new Card(snapshot.getKey().toString(),
+                            snapshot.child("name").getValue().toString());
+
+                    rowItems.add(item);
+                    cardAdapter.notifyDataSetChanged();
                 }
             }
 
