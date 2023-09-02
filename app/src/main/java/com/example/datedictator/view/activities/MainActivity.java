@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -29,15 +30,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Card card[];
     private CardAdapter cardAdapter;
 
    // private ArrayAdapter<String> arrayAdapter;
     private DatabaseReference usersDb;
     private int i;
     private FirebaseAuth mAuth;
-    private String currentUserId;
-    private String name;
+    private String currentUserId, name, UserName;
 
     private ListView listView;
     List<Card> rowItems;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         checkUserSex();
-         rowItems = new ArrayList<Card>();
+        rowItems = new ArrayList<Card>();
 
         //choose your favorite adapter
         cardAdapter = new CardAdapter(this,R.layout.item, rowItems);
@@ -89,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 String userId = obj.getUserId();
                 usersDb.child(userPrefer).child(userId).child("Connections")
                         .child("Right").child(currentUserId).setValue(true);
+                isConnectionMatch(userId);
                 Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -119,6 +120,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void isConnectionMatch(String userId) {
+        DatabaseReference userRights = usersDb.child(userSex).child(currentUserId)
+                .child("Connections").child("Right").child(userId);
+        userRights.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toast.makeText(MainActivity.this, "Maaaatch!", Toast.LENGTH_SHORT).show();
+                    usersDb.child(userPrefer).child(userId).child("Connections")
+                            .child("Matches").child(currentUserId).setValue(true);
+                    usersDb.child(userSex).child(currentUserId).child("Connections")
+                            .child("Matches").child(userId).setValue(true);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private String userSex;
     private String userPrefer;
     public void checkUserSex(){
