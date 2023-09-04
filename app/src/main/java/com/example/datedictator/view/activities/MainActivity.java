@@ -265,6 +265,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public void goToSettings(View view) {
+        Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+        intent.putExtra("sex",userSex);
+        startActivity(intent);
+        finish();
+    }
+
 //    static void makeToast(Context ctx, String s){
 //        Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
 //    }

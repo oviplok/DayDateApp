@@ -22,10 +22,11 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                         <ImageView
                             android:id="@+id/profileImageView"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent" />
 
                         <TextView
                             android:id="@+id/helloText"
@@ -33,6 +34,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginStart="20dp"
                             android:gravity="center"
+                            android:fontFamily="@font/comfortaa"
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="40sp"
