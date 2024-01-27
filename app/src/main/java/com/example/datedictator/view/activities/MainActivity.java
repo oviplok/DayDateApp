@@ -8,13 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.datedictator.R;
 import com.example.datedictator.repository.model.Card;
-import com.example.datedictator.view.adapters.CardAdapter;
+import com.example.datedictator.view.activities.matches.MatchesActivity;
+import com.example.datedictator.view.activities.registration.LoginRegistrationActivity;
+import com.example.datedictator.view.activities.settings.SettingsActivity;
+import com.example.datedictator.view.adapters.cards.CardAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -226,14 +228,17 @@ public class MainActivity extends AppCompatActivity {
 
         partnersDb.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildAdded(DataSnapshot snapshot, @Nullable String previousChildName) {
                 if(snapshot.exists()
                         && !snapshot.child("Connections").child("Left").hasChild(currentUserId)
                         && !snapshot.child("Connections").child("Right").hasChild(currentUserId)) {
                     Card item = new Card(snapshot.getKey().toString(),
-                            snapshot.child("name").getValue().toString());
+                            snapshot.child("name").getValue().toString(),snapshot.child("profileImageUrl").getValue().toString());
                     rowItems.add(item);
                     cardAdapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "no users", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -260,13 +265,20 @@ public class MainActivity extends AppCompatActivity {
     }
     public void logoutUser(View view) {
         mAuth.signOut();
-        Intent intent = new Intent(MainActivity.this,LoginRegistrationActivity.class);
+        Intent intent = new Intent(MainActivity.this, LoginRegistrationActivity.class);
         startActivity(intent);
         finish();
     }
 
     public void goToSettings(View view) {
-        Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        intent.putExtra("sex",userSex);
+        startActivity(intent);
+        finish();
+    }
+
+    public void goToMatches(View view) {
+        Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
         intent.putExtra("sex",userSex);
         startActivity(intent);
         finish();

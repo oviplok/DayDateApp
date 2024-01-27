@@ -1,4 +1,4 @@
-package com.example.datedictator.view.activities;
+package com.example.datedictator.view.activities.settings;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.datedictator.R;
+import com.example.datedictator.view.activities.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,7 +62,6 @@ public class SettingsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             userSex = extras.getString("sex");
-
         }
 
         mAuth = FirebaseAuth.getInstance();
@@ -194,6 +194,7 @@ public class SettingsActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG,20,baos);
                 byte[] data = baos.toByteArray();
 
+                //Блять тут вообще нихуя не понимаю че за пиздец происходит D:
                 UploadTask uploadTask = filepath.putBytes(data);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -203,7 +204,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        //Блять тут вообще нихуя не понимаю че за пиздец происходит
+
                         filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
@@ -216,7 +217,6 @@ public class SettingsActivity extends AppCompatActivity {
                         });
                     }
                 });
-
             }
             else {
                 finish();
@@ -226,7 +226,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void goToMain(View view) {
-        Intent intent = new Intent(SettingsActivity.this,MainActivity.class);
+        Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

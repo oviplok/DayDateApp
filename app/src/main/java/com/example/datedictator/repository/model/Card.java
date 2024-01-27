@@ -1,6 +1,11 @@
 package com.example.datedictator.repository.model;
 
 public class Card {
+
+    private String userId;
+    private String name;
+    private String profileImageUrl;
+
     public String getUserId() {
         return userId;
     }
@@ -8,19 +13,22 @@ public class Card {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 
-    private String userId, name;
-    public Card(String userId, String name){
+    public Card(String userId, String name, String imageUrl){
         this.userId = userId;
         this.name = name;
-
+        this.profileImageUrl = imageUrl;
     }
 }

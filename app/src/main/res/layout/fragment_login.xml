@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/fragment_vertical_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
     android:paddingBottom="@dimen/fragment_vertical_margin"
-    tools:context=".view.activities.LoginActivity"
+    tools:context=".view.activities.registration.LoginActivity"
     >
 <!--    tools:context=".ui.login.LoginFragment"-->
 
@@ -19,8 +19,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="96dp"
         android:autofillHints="@string/prompt_email"
         android:background="@drawable/rounded_edittext"
         android:drawableStart="@drawable/ic_action_email"

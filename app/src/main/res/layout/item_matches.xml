@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="20sp">
+
+<!--    android:layout_centerHorizontal="true"-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_view"
+        app:cardCornerRadius="40dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9">
+    <ImageView
+        android:id="@+id/MatchImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher" />
+    </androidx.cardview.widget.CardView>
+    <!--        android:layout_gravity="center"-->
+
+<!--    android:layout_gravity="center"-->
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingStart="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:paddingBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Match's Name"
+            android:id="@+id/MatchName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Match's ID"
+            android:layout_gravity="center"
+            android:id="@+id/Matchid"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="На релизе id не будет"
+            android:layout_gravity="center"
+            android:textColor="@color/grey"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
