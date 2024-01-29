@@ -1,5 +1,7 @@
-package com.example.datedictator.view.activities.matches;
+package com.example.datedictator.view.adapters.matches;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datedictator.R;
+import com.example.datedictator.view.activities.chat.ChatActivity;
 
 public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener{
     public TextView mMatchId, mMatchName;
@@ -23,10 +26,10 @@ public class MatchesViewHolders extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
-//        Intent intent = new Intent(view.getContext(), ChatActivity.class);
-//        Bundle b = new Bundle();
-//        b.putString("matchId", mMatchId.getText().toString());
-//        intent.putExtras(b);
-//        view.getContext().startActivity(intent);
+        Intent intent = new Intent(view.getContext(), ChatActivity.class);
+        Bundle b = new Bundle();
+        b.putString("matchId", mMatchId.getText().toString());
+        intent.putExtras(b);
+        view.getContext().startActivity(intent);
     }
 }

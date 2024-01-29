@@ -1,4 +1,4 @@
-package com.example.datedictator.view.activities.matches;
+package com.example.datedictator.repository.model;
 
 public class MatchesObject {
     private String userId;

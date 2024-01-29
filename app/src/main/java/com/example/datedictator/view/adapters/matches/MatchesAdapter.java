@@ -1,4 +1,4 @@
-package com.example.datedictator.view.activities.matches;
+package com.example.datedictator.view.adapters.matches;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.datedictator.R;
+import com.example.datedictator.repository.model.MatchesObject;
 
 import java.util.List;
 

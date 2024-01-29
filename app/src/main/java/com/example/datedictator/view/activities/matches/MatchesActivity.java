@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.datedictator.R;
+import com.example.datedictator.view.adapters.matches.MatchesAdapter;
+import com.example.datedictator.repository.model.MatchesObject;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

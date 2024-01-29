@@ -128,7 +128,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     currentUserDb.child("Connections").child("Right").child("Uid").setValue(true);
                     currentUserDb.child("Connections").child("Left").child("Uid").setValue(true);
                     currentUserDb.child("Connections").child("Left").child("Uid").setValue(true);
-                    currentUserDb.child("profileImageUrl\n").setValue("https://firebasestorage.googleapis.com/v0/b/date-dict-app.appspot.com/o/profileImages%2FXNl7aO-huvk.jpg?alt=media&token=7ca404b9-2b9c-4629-ba59-29d83d598fff");
+                    currentUserDb.child("profileImageUrl").setValue("https://firebasestorage.googleapis.com/v0/b/date-dict-app.appspot.com/o/profileImages%2FXNl7aO-huvk.jpg?alt=media&token=7ca404b9-2b9c-4629-ba59-29d83d598fff");
                 }
                 mProgBar.setVisibility(View.GONE);
 
