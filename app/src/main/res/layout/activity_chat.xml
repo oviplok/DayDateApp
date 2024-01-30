@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:hint="message..."
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:id="@+id/message"/>
         <Button
             android:layout_weight="0.2"
             android:layout_width="0dp"

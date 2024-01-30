@@ -24,7 +24,6 @@ import java.util.Objects;
 
 public class MatchesActivity extends AppCompatActivity {
     private RecyclerView.Adapter mMatchesAdapter;
-    private String userSex, prefer;;
     private FirebaseAuth mAuth;
     private String currentUserID;
 
@@ -33,11 +32,11 @@ public class MatchesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            userSex = extras.getString("sex");
-            Toast.makeText(this, userSex, Toast.LENGTH_SHORT).show();
-        }
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            userSex = extras.getString("sex");
+//            Toast.makeText(this, userSex, Toast.LENGTH_SHORT).show();
+//        }
 
 //        if(Objects.equals(userSex, "Female")){
 //            prefer="Male";
@@ -88,11 +87,8 @@ public class MatchesActivity extends AppCompatActivity {
     }
 
     private void FetchMatchInformation(String key) {
-
-
-
         DatabaseReference userDb = FirebaseDatabase.getInstance()
-                .getReference().child("Users").child(prefer).child(key);
+                .getReference().child("Users").child(key);
 
         userDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
