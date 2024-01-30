@@ -44,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
     private ImageView profileImage;
     private FirebaseAuth mAuth;
     private DatabaseReference mSettingsDatabase;
-    String userId, name, phone, profileImageUrl, userSex;
+    String userId, name, phone, profileImageUrl; //userSex;
     private Uri resultUri;
 
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
@@ -59,14 +59,14 @@ public class SettingsActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirm_button);
         profileImage = findViewById(R.id.profileImageSettings);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            userSex = extras.getString("sex");
-        }
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            userSex = extras.getString("sex");
+//        }
 
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getCurrentUser().getUid();
-        mSettingsDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userSex).child(userId);
+        mSettingsDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
         //Мерлин спасибо брат
         pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {

@@ -39,14 +39,14 @@ public class MatchesActivity extends AppCompatActivity {
             Toast.makeText(this, userSex, Toast.LENGTH_SHORT).show();
         }
 
-        if(Objects.equals(userSex, "Female")){
-            prefer="Male";
-            Toast.makeText(this, "prefer "+prefer, Toast.LENGTH_SHORT).show();
-        }
-        else {
-            prefer="Female";
-            Toast.makeText(this, "prefer "+prefer, Toast.LENGTH_SHORT).show();
-        }
+//        if(Objects.equals(userSex, "Female")){
+//            prefer="Male";
+//            Toast.makeText(this, "prefer "+prefer, Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            prefer="Female";
+//            Toast.makeText(this, "prefer "+prefer, Toast.LENGTH_SHORT).show();
+//        }
 
         mAuth = FirebaseAuth.getInstance();
 //        userId = mAuth.getCurrentUser().getUid();
@@ -67,7 +67,7 @@ public class MatchesActivity extends AppCompatActivity {
     private void getUserMatchId() {
 
         DatabaseReference matchDb = FirebaseDatabase.getInstance().getReference()
-                .child("Users").child(userSex).child(currentUserID)
+                .child("Users").child(currentUserID)
                 .child("Connections").child("Matches");
 
         matchDb.addListenerForSingleValueEvent(new ValueEventListener() {
