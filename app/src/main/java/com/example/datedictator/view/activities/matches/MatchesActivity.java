@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.datedictator.R;
 import com.example.datedictator.view.adapters.matches.MatchesAdapter;
-import com.example.datedictator.repository.model.MatchesObject;
+import com.example.datedictator.repository.model.Match;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MatchesActivity extends AppCompatActivity {
     private RecyclerView.Adapter mMatchesAdapter;
@@ -105,7 +103,7 @@ public class MatchesActivity extends AppCompatActivity {
                     }
 
 
-                    MatchesObject obj = new MatchesObject(userId, name, profileImageUrl);
+                    Match obj = new Match(userId, name, profileImageUrl);
                     resultsMatches.add(obj);
                     mMatchesAdapter.notifyDataSetChanged();
                 }
@@ -119,8 +117,8 @@ public class MatchesActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<MatchesObject> resultsMatches = new ArrayList<MatchesObject>();
-    private List<MatchesObject> getDataSetMatches() {
+    private ArrayList<Match> resultsMatches = new ArrayList<Match>();
+    private List<Match> getDataSetMatches() {
         return resultsMatches;
     }
 }

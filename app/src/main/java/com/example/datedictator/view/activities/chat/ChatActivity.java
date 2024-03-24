@@ -11,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.datedictator.R;
-import com.example.datedictator.repository.model.ChatObject;
+import com.example.datedictator.repository.model.Chat;
 import com.example.datedictator.view.adapters.chats.ChatAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +33,10 @@ public class ChatActivity extends AppCompatActivity {
     private EditText mSendEditText;
     private Button mSendButton;
     private String currentUserID, matchId, chatId;
-    private ArrayList<ChatObject> resultsChat = new ArrayList<ChatObject>();
+    private ArrayList<Chat> resultsChat = new ArrayList<Chat>();
+    private List<Chat> getDataSetChat() {
+        return resultsChat;
+    }
 
     DatabaseReference mDatabaseUser, mDatabaseChat;
 
@@ -56,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(false);
         mChatLayoutManager = new LinearLayoutManager(ChatActivity.this);
         mRecyclerView.setLayoutManager(mChatLayoutManager);
         mChatAdapter = new ChatAdapter(getDataSetChat(), ChatActivity.this);
@@ -90,9 +94,9 @@ public class ChatActivity extends AppCompatActivity {
         mSendEditText.setText(null);
     }
 
-    private List<ChatObject> getDataSetChat() {
-        return resultsChat;
-    }
+//    private List<ChatObject> getDataSetChat() {
+//        return resultsChat;
+//    }
 
     private void getChatId(){
         mDatabaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -101,6 +105,7 @@ public class ChatActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     chatId = dataSnapshot.getValue().toString();
                     mDatabaseChat = mDatabaseChat.child(chatId);
+                    getChatMessages();
                 }
             }
 
@@ -110,4 +115,49 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getChatMessages() {
+        mDatabaseChat.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.exists()){
+                    String message = null;
+                    String createdByUser = null;
+
+                    if(dataSnapshot.child("text").getValue()!=null){
+                        message = dataSnapshot.child("text").getValue().toString();
+                    }
+                    if(dataSnapshot.child("createdByUser").getValue()!=null){
+                        createdByUser = dataSnapshot.child("createdByUser").getValue().toString();
+                    }
+
+                    if(message!=null && createdByUser!=null){
+                        Boolean currentUserBoolean = false;
+                        if(createdByUser.equals(currentUserID)){
+                            currentUserBoolean = true;
+                        }
+                        Chat newMessage = new Chat(message, currentUserBoolean);
+                        resultsChat.add(newMessage);
+                        mChatAdapter.notifyDataSetChanged();
+                    }
+                }
+
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+
+
 }
