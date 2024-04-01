@@ -1,18 +1,18 @@
 package com.example.datedictator.repository.model;
 
-public class Chat {
-    private String message;
+public class Message {
+    private String text;
     private Boolean currentUser;
-    public Chat(String message, Boolean currentUser){
-        this.message = message;
+    public Message(String text, Boolean currentUser){
+        this.text = text;
         this.currentUser = currentUser;
     }
 
-    public String getMessage(){
-        return message;
+    public String getText(){
+        return text;
     }
-    public void setMessage(String userID){
-        this.message = message;
+    public void setText(String userID){
+        this.text = text;
     }
 
     public Boolean getCurrentUser(){

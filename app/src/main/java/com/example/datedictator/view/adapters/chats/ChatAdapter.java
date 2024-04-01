@@ -10,17 +10,17 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datedictator.R;
-import com.example.datedictator.repository.model.Chat;
+import com.example.datedictator.repository.model.Message;
 
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolders>{
-    private List<Chat> chatList;
+    private List<Message> messageList;
     private Context context;
 
 
-    public ChatAdapter(List<Chat> chatList, Context context){
-        this.chatList = chatList;
+    public ChatAdapter(List<Message> messageList, Context context){
+        this.messageList = messageList;
         this.context = context;
     }
 
@@ -37,8 +37,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolders>{
 
     @Override
     public void onBindViewHolder(ChatViewHolders holder, int position) {
-        holder.mMessage.setText(chatList.get(position).getMessage());
-        if(chatList.get(position).getCurrentUser()){
+        holder.mMessage.setText(messageList.get(position).getText());
+        if(messageList.get(position).getCurrentUser()){
             holder.mMessage.setGravity(Gravity.END);
             holder.mMessage.setTextColor(Color.parseColor("#404040"));
             holder.mContainer.setBackgroundColor(Color.parseColor("#F4F4F4"));
@@ -51,6 +51,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolders>{
 
     @Override
     public int getItemCount() {
-        return this.chatList.size();
+        return this.messageList.size();
     }
 }

@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.datedictator.R;
-import com.example.datedictator.repository.model.Chat;
+import com.example.datedictator.repository.model.Message;
 import com.example.datedictator.view.adapters.chats.ChatAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -33,9 +33,9 @@ public class ChatActivity extends AppCompatActivity {
     private EditText mSendEditText;
     private Button mSendButton;
     private String currentUserID, matchId, chatId;
-    private ArrayList<Chat> resultsChat = new ArrayList<Chat>();
-    private List<Chat> getDataSetChat() {
-        return resultsChat;
+    private ArrayList<Message> resultsMessage = new ArrayList<Message>();
+    private List<Message> getDataSetChat() {
+        return resultsMessage;
     }
 
     DatabaseReference mDatabaseUser, mDatabaseChat;
@@ -136,8 +136,8 @@ public class ChatActivity extends AppCompatActivity {
                         if(createdByUser.equals(currentUserID)){
                             currentUserBoolean = true;
                         }
-                        Chat newMessage = new Chat(message, currentUserBoolean);
-                        resultsChat.add(newMessage);
+                        Message newMessage = new Message(message, currentUserBoolean);
+                        resultsMessage.add(newMessage);
                         mChatAdapter.notifyDataSetChanged();
                     }
                 }

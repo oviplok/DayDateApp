@@ -45,9 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_main);
 
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //choose your favorite adapter
         cardAdapter = new CardAdapter(this,R.layout.item, rowItems);
+
 
         flingContainer.setAdapter(cardAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -109,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         // Optionally add an OnItemClickListener
         flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
             @Override
@@ -151,12 +154,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String userSex;
     private String userPrefer;
-    public void checkUserSex(){
 
+    public void checkUserSex(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference userDb = usersDb.child(user.getUid());
-//                FirebaseDatabase.getInstance().getReference().child("Users");
-//                .child("Male");
         userDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -175,15 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-//                if(snapshot.getKey().equals(user.getUid())){
-//                    userSex = "Male";
-//                    userPrefer = "Female";
-//                    getPartners();
-//                }
-////                else{
-////
-////                }
-//            }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -238,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
+
     public void getPartners(){
         usersDb.addChildEventListener(new ChildEventListener() {
             @Override
@@ -258,24 +251,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-//        DatabaseReference partnersDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userPrefer);
-//
-//        partnersDb.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot snapshot, @Nullable String previousChildName) {
-//                if(snapshot.exists()
-//                        && !snapshot.child("Connections").child("Left").hasChild(currentUserId)
-//                        && !snapshot.child("Connections").child("Right").hasChild(currentUserId)) {
-//                    Card item = new Card(snapshot.getKey().toString(),
-//                            snapshot.child("name").getValue().toString(),snapshot.child("profileImageUrl").getValue().toString());
-//                    rowItems.add(item);
-//                    cardAdapter.notifyDataSetChanged();
-//                }
-//                else{
-//                    Toast.makeText(MainActivity.this, "no users", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
@@ -295,12 +270,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
     public void logoutUser(View view) {
         mAuth.signOut();
         Intent intent = new Intent(MainActivity.this, LoginRegistrationActivity.class);
         startActivity(intent);
         finish();
     }
+
 
     public void goToSettings(View view) {
         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
@@ -309,12 +287,24 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+
     public void goToMatches(View view) {
         Intent intent = new Intent(MainActivity.this, MatchesActivity.class);
 //        intent.putExtra("sex",userSex);
         startActivity(intent);
         finish();
     }
+
+
+
+
+
+
+
+
+
+
+
 
 //    static void makeToast(Context ctx, String s){
 //        Toast.makeText(ctx, s, Toast.LENGTH_SHORT).show();
