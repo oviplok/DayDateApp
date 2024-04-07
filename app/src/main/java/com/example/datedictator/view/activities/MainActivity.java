@@ -158,23 +158,25 @@ public class MainActivity extends AppCompatActivity {
         Log.e("checkUserSex:", " Start");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.e("checkUserSex:", " "+user.getUid());
-        DatabaseReference userDb = usersDb.child(user.getUid());
-        userDb.addChildEventListener(new ChildEventListener() {
+        DatabaseReference userDb = FirebaseDatabase.getInstance().getReference()
+                .child("Users").child(user.getUid().toString());
+
+        userDb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Log.e("checkUserSex:", " "+snapshot.child("name").getValue().toString());
-                    if (snapshot.child("sex").getValue() != null) {
+//                    Log.e("checkUserSex:", " "+snapshot.child("name").getValue().toString());
+                    if (snapshot.child("sex").getValue().toString() != null) {
                         userSex = snapshot.child("sex").getValue().toString();
-                        Log.e("checkUserSex:", " "+userSex);
+                        Log.e("checkUserSex:", "UserSex: "+userSex);
                         switch (userSex) {
                             case "Male":
                                 userPrefer = "Female";
-                                Log.e("checkUserSex:", " "+userPrefer);
+                                Log.e("checkUserSex:", "userPrefer: "+userPrefer);
                                 break;
                             case "Female":
                                 userPrefer = "Male";
-                                Log.e("checkUserSex:", " "+userPrefer);
+                                Log.e("checkUserSex:", "UserSex: "+userPrefer);
                                 break;
                         }
                         Log.e("checkUserSex:", " getPartners");
@@ -184,25 +186,58 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+
+//        userDb.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                if (snapshot.exists()) {
+////                    Log.e("checkUserSex:", " "+snapshot.child("name").getValue().toString());
+//                    if (snapshot.child("sex").getValue().toString() != null) {
+//                        userSex = snapshot.child("sex").getKey().toString();
+//                        Log.e("checkUserSex:", " "+userSex);
+//                        switch (userSex) {
+//                            case "Male":
+//                                userPrefer = "Female";
+//                                Log.e("checkUserSex:", " "+userPrefer);
+//                                break;
+//                            case "Female":
+//                                userPrefer = "Male";
+//                                Log.e("checkUserSex:", " "+userPrefer);
+//                                break;
+//                        }
+//                        Log.e("checkUserSex:", " getPartners");
+//                        getPartners(userPrefer);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.e("checkUserSex:", " Cancelled");
+//            }
+//        });
+
+
 
         //final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        DatabaseReference femaleDb = FirebaseDatabase.getInstance().getReference().child("Users")
@@ -242,11 +277,11 @@ public class MainActivity extends AppCompatActivity {
         usersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String s) {
-                if (snapshot.child("sex").getValue() != null) {
+                if (snapshot.child("sex").getValue() != null ) {
                     if (snapshot.exists()
                             && !snapshot.child("Connections").child("Left").hasChild(currentUserId)
                             && !snapshot.child("Connections").child("Right").hasChild(currentUserId)
-//                            && snapshot.child("sex").getValue().toString().equals(userPrefer)
+                            && snapshot.child("sex").getValue().toString().equals(userPrefer)
                     ) {
                         String profileImageUrl = "default";
                         if (!snapshot.child("profileImageUrl").getValue().equals("default")) {
