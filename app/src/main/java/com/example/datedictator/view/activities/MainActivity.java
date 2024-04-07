@@ -154,25 +154,31 @@ public class MainActivity extends AppCompatActivity {
 
     private String userSex;
     private String userPrefer;
-
     public void checkUserSex(){
+        Log.e("checkUserSex:", " Start");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.e("checkUserSex:", " "+user.getUid());
         DatabaseReference userDb = usersDb.child(user.getUid());
         userDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if (snapshot.exists()) {
+                    Log.e("checkUserSex:", " "+snapshot.child("name").getValue().toString());
                     if (snapshot.child("sex").getValue() != null) {
                         userSex = snapshot.child("sex").getValue().toString();
+                        Log.e("checkUserSex:", " "+userSex);
                         switch (userSex) {
                             case "Male":
                                 userPrefer = "Female";
+                                Log.e("checkUserSex:", " "+userPrefer);
                                 break;
                             case "Female":
                                 userPrefer = "Male";
+                                Log.e("checkUserSex:", " "+userPrefer);
                                 break;
                         }
-                        getPartners();
+                        Log.e("checkUserSex:", " getPartners");
+                        getPartners(userPrefer);
                     }
                 }
             }
@@ -231,7 +237,8 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
-    public void getPartners(){
+    public void getPartners(String userPrefer){
+        Log.e("getPartners:", " Start");
         usersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String s) {
@@ -239,13 +246,16 @@ public class MainActivity extends AppCompatActivity {
                     if (snapshot.exists()
                             && !snapshot.child("Connections").child("Left").hasChild(currentUserId)
                             && !snapshot.child("Connections").child("Right").hasChild(currentUserId)
-                            && snapshot.child("sex").getValue().toString().equals(userPrefer)) {
+//                            && snapshot.child("sex").getValue().toString().equals(userPrefer)
+                    ) {
                         String profileImageUrl = "default";
                         if (!snapshot.child("profileImageUrl").getValue().equals("default")) {
                             profileImageUrl = snapshot.child("profileImageUrl").getValue().toString();
                         }
                         Card item = new Card(snapshot.getKey(), snapshot.child("name").getValue().toString(), profileImageUrl);
                         rowItems.add(item);
+                        Log.e("getPartners:", " "+item.getName());
+//                        Toast.makeText(MainActivity.this, item.getName(), Toast.LENGTH_SHORT).show();
                         cardAdapter.notifyDataSetChanged();
                     }
                 }

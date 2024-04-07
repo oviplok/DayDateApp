@@ -1,10 +1,18 @@
 package com.example.datedictator.repository.model;
 
+import com.example.datedictator.repository.dto.UserDTO;
+
 public class Card {
 
     private String userId;
     private String name;
     private String profileImageUrl;
+
+    public void setDataFromDTO(UserDTO userDTO){
+        this.userId = userDTO.getId();
+        this.name = userDTO.getName();
+        this.profileImageUrl = userDTO.getProfileImageUrl();
+    }
 
     public String getUserId() {
         return userId;

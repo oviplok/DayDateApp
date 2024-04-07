@@ -4,7 +4,6 @@ import com.example.datedictator.repository.dto.AuthDTO;
 import com.example.datedictator.repository.dto.UserDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,7 +13,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface ApiService {
+public interface UserApiService {
     @GET("user/{usr_id}")
     Call<UserDTO> getUserById(@Path("usr_id") String userID);
 
@@ -51,6 +50,6 @@ public interface ApiService {
     @DELETE("user/{usr_id}/connections/matches/delete/")
     void deleteMatch(@Path("usr_id") String user_id);
 
-    @GET("user/{usr_id}/auth/")
-    Call<Boolean> userAuth(@Body AuthDTO authDTO);
+    @GET("user/auth/")
+    Call<String> userAuth(@Body AuthDTO authDTO);
 }

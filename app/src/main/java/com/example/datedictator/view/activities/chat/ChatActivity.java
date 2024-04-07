@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import android.widget.EditText;
 
 import com.example.datedictator.R;
 import com.example.datedictator.repository.model.Message;
+import com.example.datedictator.view.activities.MainActivity;
+import com.example.datedictator.view.activities.matches.MatchesActivity;
 import com.example.datedictator.view.adapters.chats.ChatAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -158,6 +161,11 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-
+    public void goToMatches(View view) {
+        Intent intent = new Intent(ChatActivity.this, MatchesActivity.class);
+//        intent.putExtra("sex",userSex);
+        startActivity(intent);
+        finish();
+    }
 
 }

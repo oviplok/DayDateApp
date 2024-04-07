@@ -5,17 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activities.chat.ChatActivity">
+    <LinearLayout
+        android:id="@+id/linear_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/goBack_toMatches"
+            android:layout_width="35dp"
+            android:clickable="true"
+            android:onClick="goToMatches"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_action_pokemon"/>
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/sendLayout">
+        android:layout_above="@+id/sendLayout"
+        android:layout_below="@+id/linear_back"
+        >
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recyclerView"
-            android:scrollbars="vertical">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:scrollbars="vertical"></androidx.recyclerview.widget.RecyclerView>
     </androidx.core.widget.NestedScrollView>
     <LinearLayout
         android:id="@+id/sendLayout"

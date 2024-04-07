@@ -7,9 +7,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.datedictator.repository.dto.AuthDTO;
 import com.example.datedictator.repository.dto.UserDTO;
-import com.example.datedictator.retrofit.ApiService;
+import com.example.datedictator.retrofit.UserApiService;
 import com.example.datedictator.retrofit.RetrofitClient;
+import com.example.datedictator.utils.enums.HTTPResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,19 +21,21 @@ public class AuthViewModel extends AndroidViewModel {
     public AuthViewModel(@NonNull Application application) {
         super(application);
     }
+    HTTPResponse httpResponse;
 
-    private MutableLiveData<UserDTO> data;
+    private MutableLiveData<UserDTO> userData;
+    private MutableLiveData<AuthDTO> authData;
 
     public LiveData<UserDTO> getUserById(String userID) {
-        if (data == null) {
-            data = new MutableLiveData<>();
-            ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-            Call<UserDTO> call = apiService.getUserById(userID);
+        if (userData == null) {
+            userData = new MutableLiveData<>();
+            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
+            Call<UserDTO> call = userApiService.getUserById(userID);
             call.enqueue(new Callback<UserDTO>() {
 
                 @Override
                 public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-                    data.setValue(response.body());
+                    userData.setValue(response.body());
                 }
 
                 @Override
@@ -40,6 +44,35 @@ public class AuthViewModel extends AndroidViewModel {
                 }
             });
         }
-        return data;
+        return userData;
     }
+
+    private String result;
+    public String getUserId(AuthDTO authDTO) {
+
+            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
+//            Call<UserDTO> call = userApiService.getUserById(userID);
+            Call<String> call = userApiService.userAuth(authDTO);
+            call.enqueue(new Callback<String>() {
+
+
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if(response.body()!=null){
+                        result = response.body();
+                    }
+                    else{
+                        result = "NO_RESULT";
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
+        return result;
+    }
+
+
 }
