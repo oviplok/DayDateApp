@@ -7,6 +7,11 @@ public class Card {
     private String userId;
     private String name;
     private String profileImageUrl;
+    private String description;
+
+    public Card() {
+
+    }
 
     public void setDataFromDTO(UserDTO userDTO){
         this.userId = userDTO.getId();

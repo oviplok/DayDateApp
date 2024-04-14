@@ -4,6 +4,9 @@ public class Match {
     private String userId;
     private String name;
     private String profileImageUrl;
+
+    private String description;
+
     public Match(String userId, String name, String profileImageUrl){
         this.userId = userId;
         this.name = name;

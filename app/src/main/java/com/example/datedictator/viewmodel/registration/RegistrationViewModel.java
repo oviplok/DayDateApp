@@ -1,6 +1,7 @@
-package com.example.datedictator.viewmodel;
+package com.example.datedictator.viewmodel.registration;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -31,28 +32,34 @@ public class RegistrationViewModel  extends AndroidViewModel{
     }
 
     private boolean result;
+    private String userID;
 
-    public boolean checkUser(AuthDTO authDTO) {
+    //TODO ПЕРЕДЕЛАТЬ ПОД ПОЛУЧЕНИЕ ID
+    public String checkUser(AuthDTO authDTO) {
             authData = new MutableLiveData<>();
-            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
+//            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
 //            Call<UserDTO> call = userApiService.getUserById(userID);
             Call<String> call = userApiService.userAuth(authDTO);
 
         call.enqueue(new Callback<String>() {
-
-
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    result = response.body() != null;
+                    if(response.body()!=null){
+                        userID = response.body();
+                    }
+                    else{
+                        userID = "NO_RESULT";
+                    }
+
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-
+                    Log.e("RegistrationViewModel:", "checkUser: " + t);
                 }
             });
 
-        return result;
+        return userID;
     }
 
     //Check

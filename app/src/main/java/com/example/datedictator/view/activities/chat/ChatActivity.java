@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,13 +54,13 @@ public class ChatActivity extends AppCompatActivity {
         currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users")
-                .child(currentUserID).child("connections").child("matches")
-                .child(matchId).child("chatId");
-        mDatabaseChat = FirebaseDatabase.getInstance().getReference().child("Chat");
-
-
+                .child(currentUserID).child("Connections").child("Matches")
+                .child(matchId).child("ChatId");
+        mDatabaseChat = FirebaseDatabase.getInstance().getReference().child("Chat");//.child(chatId);
 
         getChatId();
+
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
@@ -107,6 +108,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     chatId = dataSnapshot.getValue().toString();
+                    Log.e("onDataChange: ", chatId);
                     mDatabaseChat = mDatabaseChat.child(chatId);
                     getChatMessages();
                 }

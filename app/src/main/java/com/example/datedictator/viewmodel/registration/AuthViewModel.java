@@ -1,6 +1,7 @@
-package com.example.datedictator.viewmodel;
+package com.example.datedictator.viewmodel.registration;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -18,8 +19,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AuthViewModel extends AndroidViewModel {
+
+    private UserApiService userApiService;
     public AuthViewModel(@NonNull Application application) {
         super(application);
+        userApiService = RetrofitClient.getClient().create(UserApiService.class);
     }
     HTTPResponse httpResponse;
 
@@ -29,13 +33,14 @@ public class AuthViewModel extends AndroidViewModel {
     public LiveData<UserDTO> getUserById(String userID) {
         if (userData == null) {
             userData = new MutableLiveData<>();
-            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
+//            UserApiService
             Call<UserDTO> call = userApiService.getUserById(userID);
             call.enqueue(new Callback<UserDTO>() {
 
                 @Override
                 public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
                     userData.setValue(response.body());
+//                    return false;
                 }
 
                 @Override
@@ -50,7 +55,7 @@ public class AuthViewModel extends AndroidViewModel {
     private String result;
     public String getUserId(AuthDTO authDTO) {
 
-            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
+//            UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
 //            Call<UserDTO> call = userApiService.getUserById(userID);
             Call<String> call = userApiService.userAuth(authDTO);
             call.enqueue(new Callback<String>() {
@@ -64,11 +69,12 @@ public class AuthViewModel extends AndroidViewModel {
                     else{
                         result = "NO_RESULT";
                     }
+//                    return false;
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-
+                    Log.e("AuthViewModel:", "getUserId: " + t);
                 }
             });
         return result;

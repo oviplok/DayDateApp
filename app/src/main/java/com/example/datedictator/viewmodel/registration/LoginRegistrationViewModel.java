@@ -1,6 +1,7 @@
-package com.example.datedictator.viewmodel;
+package com.example.datedictator.viewmodel.registration;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -15,13 +16,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginRegistrationViewModel extends AndroidViewModel {
+
+    private UserApiService userApiService;
     public LoginRegistrationViewModel(@NonNull Application application) {
         super(application);
+        userApiService = RetrofitClient.getClient().create(UserApiService.class);
     }
 
     private boolean result;
     public boolean checkUserExist(String userId){
-        UserApiService userApiService = RetrofitClient.getClient().create(UserApiService.class);
+
         Call<UserDTO> call = userApiService.getUserById(userId);
         call.enqueue(new Callback<UserDTO>() {
 
@@ -30,11 +34,13 @@ public class LoginRegistrationViewModel extends AndroidViewModel {
                 if(response.body()!=null){
                     result = true;
                 }
+//                return false;
             }
 
             @Override
             public void onFailure(Call<UserDTO> call, Throwable t) {
                 // Handle failure
+                Log.e("LoginRegistrationViewModel:", "checkUserExist: " + t);
             }
         });
         return result;
