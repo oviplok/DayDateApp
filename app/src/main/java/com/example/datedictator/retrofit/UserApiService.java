@@ -24,7 +24,7 @@ public interface UserApiService {
     void deleteUserById(@Path("usr_id") String userID);
 
     @PUT("user/{usr_id}/update-profile")
-    void updateUserProfile(@Path("usr_id") String userID);
+    void updateUserProfile(@Path("usr_id") String userID,@Body UserDTO userDTO);
 
     @GET("user/{usr_id}/get_sex")
     Call<String> getUserSex(@Path("usr_id") String userID);
