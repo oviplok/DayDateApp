@@ -18,13 +18,13 @@ public interface UserApiService {
     Call<UserDTO> getUserById(@Path("usr_id") String userID);
 
     @POST("user/add-profile")
-    void addNewUser(@Body UserDTO userDTO);
+    Call<Void> addNewUser(@Body UserDTO userDTO);
 
     @DELETE("user/{usr_id}/delete-profile")
-    void deleteUserById(@Path("usr_id") String userID);
+    Call<Void> deleteUserById(@Path("usr_id") String userID);
 
     @PUT("user/{usr_id}/update-profile")
-    void updateUserProfile(@Path("usr_id") String userID,@Body UserDTO userDTO);
+    Call<Void> updateUserProfile(@Path("usr_id") String userID,@Body UserDTO userDTO);
 
     @GET("user/{usr_id}/get_sex")
     Call<String> getUserSex(@Path("usr_id") String userID);
@@ -34,11 +34,11 @@ public interface UserApiService {
                                     @Path("pref_sex") String pref_sex);
 
     @PUT("user/{usr_id}/connections/right/{usr_id2}")
-    void onRight(@Path("usr_id") String userID,
+    Call<Void> onRight(@Path("usr_id") String userID,
                                     @Path("usr_id2") String partnerID);
 
     @PUT("user/{usr_id}/connections/left/{usr_id2}")
-    void onLeft(@Path("usr_id") String userID,
+    Call<Void> onLeft(@Path("usr_id") String userID,
                          @Path("usr_id2") String partnerID);
     @PUT("user/{usr_id}/connections/matches/is_match/{usr_id2}")
     Call<Boolean> isMatch(@Path("usr_id") String userID,
@@ -48,8 +48,8 @@ public interface UserApiService {
     Call<UserDTO> getMatchInfo(@Path("usr_id") String user_id, @Path("partners_id") String partners_id);
 
     @DELETE("user/{usr_id}/connections/matches/delete/")
-    void deleteMatch(@Path("usr_id") String user_id);
+    Call<Void> deleteMatch(@Path("usr_id") String user_id);
 
-    @GET("user/auth/")
+    @POST("user/auth/")
     Call<String> userAuth(@Body AuthDTO authDTO);
 }

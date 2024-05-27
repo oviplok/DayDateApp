@@ -5,6 +5,7 @@ import com.example.datedictator.repository.dto.MessageDTO;
 
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -14,13 +15,13 @@ import retrofit2.http.Path;
 public interface ChatApiService {
 
     @POST("/messages/{chat_id}")
-    void sendMessage(@Path("chat_id") String id, @Body MessageDTO message);
+    Call<Void> sendMessage(@Path("chat_id") String id, @Body MessageDTO message);
 
     @GET("/messages/{chat_id}")
     List<MessageDTO> getMessages(@Path("chat_id") String id, @Body MessageDTO message);
 
     @DELETE("/chat/{chat_id}")
-    void deleteChat(@Path("chat_id") String id);
+    Call<Void> deleteChat(@Path("chat_id") String id);
 
     @GET("/chat/{usr_id}")
     List<ChatDTO> findUserChats(@Path("usr_id") String id);
