@@ -8,4 +8,5 @@
     <color name="red">#FD1D1D</color>
     <color name="empty">#00FFFFFF</color>
     <color name="backgtound_white">#E6FFFFFF</color>
+    <color name="grey">#E6818181</color>
 </resources>

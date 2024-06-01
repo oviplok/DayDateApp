@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20sp"
+            android:id="@+id/container"
+            android:orientation="vertical">
+            <TextView
+                android:paddingBottom="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Text"
+                android:id="@+id/message"/>
+
+
+            <TextView
+                android:visibility="gone"
+
+                android:paddingBottom="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ur message"
+                android:id="@+id/usr_message"/>
+            <TextView
+                android:visibility="gone"
+
+                android:paddingBottom="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Partner message"
+                android:id="@+id/part_message"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

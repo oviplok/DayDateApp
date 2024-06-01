@@ -4,30 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient_drawable"
-    tools:context=".view.activities.LoginRegistrationActivity">
+    android:background="@drawable/blur_main_back_ground"
+    tools:context=".view.activities.registration.LoginRegistrationActivity">
 
-
+    <!--        android:layout_marginVertical="30dp"-->
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="248dp"
-        android:layout_height="231dp"
+        android:layout_width="250dp"
+        android:layout_height="230dp"
 
-        android:src="@drawable/ic_launcher_foreground"
+
+        android:src="@drawable/logo_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    android:layout_marginTop="26dp"-->
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
+
         android:fontFamily="@font/comfortaa"
         android:gravity="center"
-        android:text="Welcome to Date Dictator!"
-        android:textColor="@color/white"
-        android:textSize="28dp"
+        android:text="Добро \n Пожаловать!"
+        android:textColor="@color/black"
+        android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,24 +37,33 @@
 
     <Button
         android:id="@+id/to_reg_button"
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:layout_marginHorizontal="20dp"
-        android:text="Registration"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/registration_button"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/comfortaa"
+        app:layout_constraintBottom_toTopOf="@+id/to_login_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/to_login_button"
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Login"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#FFFFFF"
+        android:textSize="25dp"
+        android:text="@string/login_button"
+        android:fontFamily="@font/comfortaa"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/loading_activity_reglog"

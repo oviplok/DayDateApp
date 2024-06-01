@@ -1,4 +1,4 @@
-package com.example.datedictator.view.adapters;
+package com.example.datedictator.view.adapters.cards;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.datedictator.R;
 import com.example.datedictator.repository.model.Card;
 
@@ -33,7 +34,8 @@ public class CardAdapter extends ArrayAdapter<Card> {
         ImageView image = convertView.findViewById(R.id.profileImageView);
 
         textView.setText(card_item.getName());
-        image.setImageResource(R.mipmap.ic_launcher);
+        Glide.with(getContext()).load(card_item.getProfileImageUrl()).into(image);
+        //image.setImageResource(R.mipmap.ic_launcher);
 
         return convertView;
     }

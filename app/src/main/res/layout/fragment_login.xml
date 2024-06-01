@@ -5,24 +5,35 @@
     android:id="@+id/login_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient_drawable"
+    android:background="@drawable/blur_main_back_ground"
     android:paddingLeft="@dimen/fragment_horizontal_margin"
     android:paddingTop="@dimen/fragment_vertical_margin"
     android:paddingRight="@dimen/fragment_horizontal_margin"
     android:paddingBottom="@dimen/fragment_vertical_margin"
-    tools:context=".view.activities.LoginActivity"
+    tools:context=".view.activities.registration.LoginActivity"
     >
 <!--    tools:context=".ui.login.LoginFragment"-->
+
+    <ImageView
+        android:id="@+id/logo2"
+        android:layout_width="202dp"
+        android:layout_height="152dp"
+
+
+        android:src="@drawable/logo_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/email_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_email"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/layer_list"
         android:drawableStart="@drawable/ic_action_email"
         android:drawablePadding="5dp"
         android:fontFamily="@font/comfortaa"
@@ -34,7 +45,7 @@
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logo2" />
 
     <EditText
         android:id="@+id/password_login"
@@ -44,7 +55,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_password"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/layer_list"
         android:drawableStart="@drawable/ic_action_password"
         android:drawablePadding="5dp"
         android:fontFamily="@font/comfortaa"
@@ -60,23 +71,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_login" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa"
+        android:text="@string/forgot_a_password"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_login" />
+
     <Button
         android:fontFamily="@font/comfortaa"
         android:id="@+id/login_button"
         android:textColor="@color/black"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginStart="48dp"
+        android:elevation="2dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="@color/white"
+        android:textSize="25dp"
         android:text="@string/action_sign_in_short"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_login"
+
         app:layout_constraintVertical_bias="0.2" />
 
     <ProgressBar

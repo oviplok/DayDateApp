@@ -1,4 +1,4 @@
-package com.example.datedictator.view.activities;
+package com.example.datedictator.view.activities.registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.datedictator.R;
+import com.example.datedictator.view.activities.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -116,16 +117,20 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
 
-                    Toast.makeText(RegistrationActivity.this, email+" "+password, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
                     String userId = mAuth.getCurrentUser().getUid();
                     DatabaseReference currentUserDb= FirebaseDatabase.getInstance()
-                            .getReference().child("Users").child(gender).child(userId);
+                            .getReference().child("Users").child(userId);
                     currentUserDb.child("name").setValue(name);
+                    currentUserDb.child("sex").setValue(gender);
                     currentUserDb.child("Connections").child("Right").child("Uid").setValue(true);
                     currentUserDb.child("Connections").child("Left").child("Uid").setValue(true);
-                   // currentUserDb.setValue(name);
+                    currentUserDb.child("Connections").child("Left").child("Uid").setValue(true);
+                    //Добавить локальный дефолт пикчи
+                    currentUserDb.child("profileImageUrl").setValue("https://firebasestorage.googleapis.com/v0/b/date-dict-app.appspot.com/o/profileImages%2FXNl7aO-huvk.jpg?alt=media&token=7ca404b9-2b9c-4629-ba59-29d83d598fff");
                 }
                 mProgBar.setVisibility(View.GONE);
 

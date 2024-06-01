@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Date Dictator</string>
+    <string name="app_name">DayDate</string>
     <string name="hello_world">Che</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -13,4 +13,14 @@
     <string name="registration">Registration</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_edittext">Your name</string>
+    <string name="password_edittext">Your phone</string>
+    <string name="registration_button">Registration</string>
+    <string name="login_button">Login</string>
+    <string name="male_gen">Male</string>
+    <string name="female_gen">Female</string>
+    <string name="password_check">Password check</string>
+    <string name="forgot_a_password">Forgot a password?</string>
+    <string name="confirm_settings">Confirm settings</string>
+    <string name="go_back_to_matching">Go back to matching</string>
 </resources>
