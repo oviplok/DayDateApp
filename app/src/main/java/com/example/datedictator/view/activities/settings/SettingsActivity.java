@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +41,8 @@ import java.util.Map;
 public class SettingsActivity extends AppCompatActivity {
 
     private EditText nameText, phoneText;
-    private Button confirmButton, exitButton;
+    private Button confirmButton;
+    private ImageButton exitButton;
     private ImageView profileImage;
     private FirebaseAuth mAuth;
     private DatabaseReference mSettingsDatabase;

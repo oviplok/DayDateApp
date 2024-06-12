@@ -36,19 +36,22 @@
             android:layout_height="wrap_content"
             android:text="Match's Name"
             android:id="@+id/MatchName"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Скажите привет!"
+            android:textColor="@color/grey" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Match's ID"
+            android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/Matchid"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="На релизе id не будет"
-            android:layout_gravity="center"
-            android:textColor="@color/grey"
-            />
+
     </LinearLayout>
 
 
