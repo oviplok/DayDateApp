@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/user_button"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
@@ -52,19 +52,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <!--           android:backgroundTint="#E10000"-->
-            <ImageView
+            <ImageButton
                 android:id="@+id/match_button"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginHorizontal="30dp"
                 android:background="@drawable/matches_icon"
                 android:clickable="true"
+                android:backgroundTint="#EDADC9"
                 android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/swipe_button"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
@@ -72,6 +73,7 @@
                 android:background="@drawable/pink_heart"
                 android:backgroundTint="#000000"
                 android:clickable="true"
+                android:onClick="goToMatches"
                 android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

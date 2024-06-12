@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.datedictator.R;
+import com.example.datedictator.view.activities.MainActivity;
+import com.example.datedictator.view.activities.settings.SettingsActivity;
 import com.example.datedictator.view.adapters.matches.MatchesAdapter;
 import com.example.datedictator.repository.model.Match;
 import com.google.firebase.auth.FirebaseAuth;
@@ -120,5 +124,11 @@ public class MatchesActivity extends AppCompatActivity {
     private ArrayList<Match> resultsMatches = new ArrayList<Match>();
     private List<Match> getDataSetMatches() {
         return resultsMatches;
+    }
+
+    public void goToMatches(View view) {
+        Intent intent = new Intent(MatchesActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
