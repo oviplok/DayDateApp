@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layer_list"
-        android:hint="@string/name_edittext"
+        android:hint="Ваше имя"
         android:inputType="textPersonName"
         android:paddingStart="15dp"
         android:layout_marginStart="24dp"
@@ -38,7 +38,7 @@
         android:background="@drawable/layer_list"
         android:layout_marginVertical="10dp"
         android:inputType="phone"
-        android:hint="@string/password_edittext"
+        android:hint="Ваш телефон"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:paddingStart="15dp"
@@ -53,21 +53,21 @@
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:onClick="confirmSettings"
-        android:text="@string/confirm_settings"
+        android:text="Подтвердить настройки"
         android:fontFamily="@font/comfortaa"
         />
-<!--    <Button-->
-<!--        android:id="@+id/goBack_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginBottom="40dp"-->
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
 
-<!--        android:layout_gravity="center"-->
-<!--        android:onClick="goToMain"-->
-<!--        android:text="@string/go_back_to_matching"-->
-<!--        android:fontFamily="@font/comfortaa"-->
-<!--        />-->
+        android:layout_gravity="center"
+        android:onClick="signOut"
+        android:text="Выйти"
+        android:fontFamily="@font/comfortaa"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

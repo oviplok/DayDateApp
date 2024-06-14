@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.datedictator.R;
 import com.example.datedictator.view.activities.MainActivity;
+import com.example.datedictator.view.activities.registration.LoginRegistrationActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -229,6 +230,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void goToMain(View view) {
         Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void signOut(View view) {
+        mAuth.signOut();
+        Intent intent = new Intent(SettingsActivity.this, LoginRegistrationActivity.class);
         startActivity(intent);
         finish();
     }
